@@ -22,6 +22,7 @@ char *sudosh_read_line(void);
 char **sudosh_split_line(char *line);
 int sudosh_execute(char **args);
 
+void save_history(const char *line);
 
 // -- builtins
 int sudosh_cd(char **args);
@@ -42,9 +43,9 @@ int sudosh_exit(char **args);
  * ---------------------------
  * 
  *  Basic Enhancements:
- *  [] Command History: Store executed commands and allow navigation with arrow keys.
+ *  [x] Command History: Store executed commands and allow navigation with arrow keys.
  *  [] Command Autocompletion: Use readline for tab-based completion.
- *  [] Colorful Prompt: Add ANSI escape sequences for a customized look.
+ *  [x] Colorful Prompt: Add ANSI escape sequences for a customized look.
  *  [] Improved Error Handling: Provide better messages for invalid commands.
  *  [] Command Aliases: Implement an alias system for frequently used commands.
  * 

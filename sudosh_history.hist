@@ -1,0 +1,8 @@
+echo hello world
+cat
+cat hello > hello.txt
+touch hello.txt
+exit
+echo hello
+help
+exit

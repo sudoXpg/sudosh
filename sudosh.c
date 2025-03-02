@@ -19,8 +19,9 @@ void sudosh(void){
     int status=1;
 
     while(status){
-        printf("> ");
+        printf("\x1b[32m>\x1b[0m ");
         line = sudosh_read_line();
+        save_history(line);
         args = sudosh_split_line(line);
         status = sudosh_execute(args);
 
@@ -161,16 +162,23 @@ int sudosh_exit(char **args){
 
 int sudosh_execute(char **args)
 {
-  if (args[0] == NULL) {
-    // An empty command was entered.
-    return 1;
-  }
-
-  for(int i = 0; i < sudosh_builtin_count   (); i++) {
-    if (strcmp(args[0], builtin_str[i]) == 0) {
-      return (*builtin_fxn[i])(args);
+    if (args[0] == NULL) {
+      // An empty command was entered.
+      return 1;
     }
-  }
+    
+    for(int i = 0; i < sudosh_builtin_count   (); i++) {
+      if (strcmp(args[0], builtin_str[i]) == 0) {
+        return (*builtin_fxn[i])(args);
+      }
+    }
 
   return sudosh_launch  (args);
+}
+
+void save_history(const char *line){
+    FILE *fp;
+    fp = fopen("sudosh_history.hist","a");
+    fprintf(fp, "%s\n", line);
+    fclose(fp);
 }
