@@ -28,7 +28,7 @@ void save_history(const char *line);
 int sudosh_cd(char **args);
 int sudosh_help(char **args);
 int sudosh_exit(char **args);
-
+int sudosh_clear(char **args);
 
 
 

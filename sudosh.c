@@ -126,8 +126,8 @@ int sudosh_launch(char **args){
     return 1;
 }
 
-char *builtin_str[] = {"cd", "help", "exit"};
-int (*builtin_fxn[]) (char **) = {&sudosh_cd, &sudosh_help, &sudosh_exit};
+char *builtin_str[] = {"cd", "help", "clear", "exit"};
+int (*builtin_fxn[]) (char **) = {&sudosh_cd, &sudosh_help, &sudosh_clear, &sudosh_exit};
 
 int sudosh_builtin_count(){
     return sizeof(builtin_str) / sizeof(char *);
@@ -181,4 +181,9 @@ void save_history(const char *line){
     fp = fopen("sudosh_history.hist","a");
     fprintf(fp, "%s\n", line);
     fclose(fp);
+}
+
+int sudosh_clear(char **args) {
+    printf("\033[H\033[J");
+    return 1;
 }
