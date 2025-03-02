@@ -1,47 +1,57 @@
-# sudosh - A Simple Unix Shell
+# SudoSH - A Simple Shell
 
-sudosh is a minimal Unix shell written in C. It supports basic command execution, built-in commands, and an interactive prompt.
+SudoSH is a simple shell implementation in C, providing basic command execution, built-in commands, and command history tracking.
 
 ## Features
+- Custom shell prompt (`>`)
+- Command execution using `execvp`
+- Built-in commands:
+  - `cd` (Change directory)
+  - `help` (List available built-in commands)
+  - `clear` (Clear the terminal screen)
+  - `exit` (Exit the shell)
+- Command history logging to `sudosh_history.hist`
+- Dynamic memory allocation for command parsing
 
-### Basic Features
-- Command Execution: Run external commands using `execvp`.
-- Built-in Commands: Supports `cd`, `help`, and `exit`.
-- Interactive Prompt: Displays a `>` prompt for user input.
+## Compilation and Execution
+### Prerequisites
+Ensure you have a C compiler installed, such as `gcc`.
 
-### Planned Features
-- Command History: Store executed commands for easy recall.
-- Autocompletion: Use `readline` for tab-based autocompletion.
-- Piping (`|`): Support command chaining like `ls | grep .c`.
-- I/O Redirection (`<`, `>`): Redirect input and output streams.
-- Background Execution (`&`): Allow running processes in the background.
-- Signal Handling: Handle `Ctrl+C` (SIGINT) and `Ctrl+Z` (SIGTSTP).
-
-## Installation
-
+### Build
 ```sh
-git clone https://github.com/sudoXpg/sudosh.git
-cd sudosh
-make
+gcc -o sudosh sudosh.c
 ```
 
-## Usage
-
-Compile and Run the shell:
+### Run
 ```sh
-gcc sudosh.c -o sudosh
 ./sudosh
 ```
 
-Available built-in commands:
-- `cd <dir>`: Change directory
-- `help`: Display available commands
-- `exit`: Exit the shell
+## Code Overview
+### Main Functions
+- `sudosh()` - The main loop of the shell
+- `sudosh_read_line()` - Reads input from the user
+- `sudosh_split_line()` - Splits input into tokens
+- `sudosh_execute()` - Executes commands
+- `sudosh_launch()` - Launches external programs
+- `save_history()` - Saves command history to a file
 
-## Code Structure
+### Built-in Commands
+- `sudosh_cd()` - Changes the current directory
+- `sudosh_help()` - Displays help information
+- `sudosh_clear()` - Clears the screen
+- `sudosh_exit()` - Exits the shell
 
-- `sudosh.h` - Header file containing function prototypes
-- `sudosh.c` - Core shell implementation
+## Future Improvements
+- Add support for piping and redirection
+- Implement job control (background processes)
+- Improve history handling (persistent history, `history` command)
+- Autocomplete support using `readline`
+
+## License
+This project is open-source and free to use under the MIT License.
+
+
 
 ## Contributing
 Contributions are welcome! Feel free to submit a pull request or suggest new features.
